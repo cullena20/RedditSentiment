@@ -1,4 +1,4 @@
-# Subreddit Sentiment Analyzer -
+# Subreddit Sentiment Analyzer 
 Analyze the sentiment of subreddits using this Python script! This looks through the titles of posts in a subreddit and categorizes them as being
 positive, negative, or neutral.
 
