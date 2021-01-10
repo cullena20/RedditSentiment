@@ -5,10 +5,10 @@ import sys
 
 
 def create_connection():
-    reddit = praw.Reddit(client_id='etCTL0OgGAY1jA',
-                         client_secret='vMtYIGE5WVK8BDczKh7ZnRup3rb3ew',
-                         user_agent='Conscious-Reply-7037',
-                         username='Conscious-Reply-7037')
+    reddit = praw.Reddit(client_id='<your client_id>',
+                         client_secret='<your clinet_secret>',
+                         user_agent='<your user_agent>',
+                         username='<your user_name>')
     return reddit
 
 
