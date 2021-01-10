@@ -1,6 +1,6 @@
 import praw
 from prawcore import NotFound
-from prawcore.exceptions import Forbidden
+from prawcore.exceptions import Forbidden, ResponseException
 import sys
 
 
@@ -14,12 +14,17 @@ def create_connection():
 
 def get_subreddit(reddit):
     while True:
-        u_sub = input('Type a subreddit to analyze!: ')
+        u_sub = input('Type a subreddit to analyze: ')
         try:
             subreddit = reddit.subreddits.search_by_name(u_sub, exact=True)[0]
+            print()
             return subreddit
         except NotFound:
-            print("Subreddit does not exist!")
+            print("Subreddit does not exist! Please try again.")
+            continue
+        except ResponseException:
+            print("Could not access subreddit! Please try again")
+            continue
 
 
 def get_posts(subreddit):

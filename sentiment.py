@@ -2,6 +2,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import re
 
 
 def analyze_posts(posts):
@@ -16,6 +17,10 @@ def analyze_posts(posts):
 
 def sentiment_to_df(analyzed_posts):
     df = pd.DataFrame.from_records(analyzed_posts)
+    return df
+
+
+def label_df(df):
     df['label'] = 0  # creates label column
     df.loc[df['compound'] > 0.2, 'label'] = 1  # if compound score is greater than 0.2 we label it as positive
     df.loc[df['compound'] < -0.2, 'label'] = -1  # if compound score is less than -0.2 we label it as positive
@@ -37,3 +42,16 @@ def sentiment(sentiment_df):
     print()
     print("Percentages:")
     print(percentages)
+    print()
+
+
+def get_most_positive(df):
+    pd.options.display.max_colwidth = 200
+    sorted_df = df.sort_values(by='compound')
+    return re.sub(' +', ' ', sorted_df.tail(5)['headline'].to_string(index=False))
+
+
+def get_most_negative(df):
+    pd.options.display.max_colwidth = 200
+    sorted_df = df.sort_values(by='compound')
+    return re.sub(' +', ' ', sorted_df.head(5)['headline'].to_string(index=False))
